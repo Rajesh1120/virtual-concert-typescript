@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import Header from './Components/Header/Header';
+import Hero from './Components/Hero/Hero';
+import EventListing from './Components/EventListing/EventListing';
+import EventDetail from './Components/EventDetails/EventDetails';
+import GlobalStyle from './Components/styles/GlobalStyle';
+import { theme } from './Components/styles/theme';
+import HowItWorks from './Components/HowItWorks';
+import Features from './Components/Feature/Features';
+import UpcomingConcerts from './Components/UpcomingConcerts/UpcomingConcerts';
+import Footer from './Components/Footer/Footer';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}> 
+      <Router>
+        <GlobalStyle theme={theme} />
+        <Header />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <Features />
+              <HowItWorks />
+              <UpcomingConcerts />
+            </>
+          } />
+          <Route path="/events" element={<EventListing />} />
+          <Route path="/event/:id" element={<EventDetail />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
-export default App;
+export default App; 

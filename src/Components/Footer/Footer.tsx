@@ -100,10 +100,10 @@ const Footer = () => {
           <p>Email: support@virtualconcert.com</p>
           <p>Phone: +1 (555) 123-4567</p>
           <SocialLinks>
-            <a href="#"><FaFacebook /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaYoutube /></a>
+            <a href="https://www.facebook.com/"><FaFacebook /></a>
+            <a href="https://www.twitter.com"><FaTwitter /></a>
+            <a href="https://www.Instagram.com/"><FaInstagram /></a>
+            <a href="https://www.youtube.com/"><FaYoutube /></a>
           </SocialLinks>
         </FooterSection>
         

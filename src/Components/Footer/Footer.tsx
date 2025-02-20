@@ -90,7 +90,7 @@ const Footer = () => {
           <LinkList>
             <li><a href="/about">About Us</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/terms">Terms of Services</a></li>
             <li><a href="/help">Help Center</a></li>
           </LinkList>
         </FooterSection>

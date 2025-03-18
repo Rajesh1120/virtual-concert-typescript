@@ -65,7 +65,8 @@ const EventDetailItem = styled.div`
 const Description = styled.div`
   margin-top: 2rem;
   line-height: 1.6;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.secondary};
+  
 `;
 
 const TicketButton = styled.button`
@@ -167,6 +168,58 @@ const EventDetail = () => {
       genre: "Electronic",
       description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",
       streamUrl: "https://www.youtube.com/embed/live_stream?channel=UCvvv"
+    },
+    6:{
+      id: 6,
+      title: "Folk Music Festival with Annie",
+      date: "2024-07-10",
+      time: "18:00",
+      image: "/images/annie.jpg",
+      artist: "Marshallow - annie",
+      price: "Free",
+      genre: "Electronic",
+      description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",
+      streamUrl: "https://www.youtube.com/embed/live_stream?channel=UCvvv"
+    
+    },
+    7:{
+      id: 7,
+      title: "Hip Hop Showcase",
+      date: "2024-07-15",
+      time: "21:30",
+      image: "/images/images-drangons.jpg",
+      artist: "images Drangons",
+      price: "Free",
+      genre: "Electronic",
+      description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",
+      streamUrl: "https://www.youtube.com/embed/live_stream?channel=UCvvv"
+    
+    },
+    8:{
+      id: 8,
+      title: "Blues & Soul Night",
+      date: "2024-07-20",
+      time: "20:00",
+      image: "/images/sabrina-carpenter.jpg",
+      artist: "Sabrina carpenter",
+      price: "Free",
+      genre: "Electronic",
+      description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",
+      streamUrl: "https://www.youtube.com/embed/live_stream?channel=UCvvv"
+    
+    },
+    9:{
+      id: 9,
+      title: "World Music Fusion",
+      date: "2024-07-25",
+      time: "19:00",
+      image: "/images/harry-styles.jpg",
+      artist: "Harry styles",
+      price: "Free",
+      genre: "Electronic",
+      description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",
+      streamUrl: "https://www.youtube.com/embed/live_stream?channel=UCvvv"
+    
     }
   };
 

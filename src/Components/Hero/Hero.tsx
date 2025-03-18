@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface HeroProps {
   backgroundImage?: string;
+  // onClick?: string
 }
 
 const HeroContainer = styled.div`
@@ -48,10 +50,11 @@ const HeroSubtitle = styled.p`
   max-width: 600px;
 `;
 
-const CTAButton = styled.button`
+const CTAButton = styled(Link)`
   background: #e31c79;
   color: #fff;
   padding: 1rem 2rem;
+  text-decoration: none;
   border: none;
   border-radius: 30px;
   font-size: 1.2rem;
@@ -64,6 +67,7 @@ const CTAButton = styled.button`
   }
 `;
 
+
 const Hero: React.FC<HeroProps> = ({ backgroundImage }) => {
   return (
     <HeroContainer>
@@ -73,7 +77,7 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage }) => {
         <HeroSubtitle>
           Join thousands of music lovers in immersive virtual concerts from the comfort of your home
         </HeroSubtitle>
-        <CTAButton>See Upcoming Shows</CTAButton>
+        <CTAButton to={`/events`}>See Upcoming Shows</CTAButton>
       </HeroContent>
     </HeroContainer>
   );

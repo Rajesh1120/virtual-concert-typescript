@@ -18,7 +18,7 @@ interface Event {
 
 const EventContainer = styled.div`
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 5rem auto;
   padding: 0 2rem;
 `;
 
@@ -109,11 +109,11 @@ const EventDetail = () => {
   const events: Record<number, Event> = {
     1: {
       id: 1,
-      title: "Summer Jazz Night",
+      title: "Billish Ellish concert",
       date: "2024-06-15",
       time: "20:00",
-      image: "/images/concert1.jpg",
-      artist: "Jazz Ensemble",
+      image: "/images/billieeilish.jpg",
+      artist: "Billish Eilish",
       price: "Free",
       genre: "Jazz",
       description: "Join us for an enchanting evening of smooth jazz featuring the renowned Jazz Ensemble. Experience the magic of improvisation and rhythm in this intimate virtual concert.",
@@ -121,11 +121,12 @@ const EventDetail = () => {
     },
     2: {
       id: 2,
-      title: "Rock Revolution",
+      
+      title: "Taylor swift Era",
       date: "2024-06-20",
       time: "21:00",
-      image: "/images/concert2.jpg",
-      artist: "The Electric Stones",
+      image: "/images/taylorswift.jpg",
+      artist: "Taylor Swift",
       price: "Free",
       genre: "Rock",
       description: "Get ready to rock with The Electric Stones! This high-energy virtual concert will feature their greatest hits and new material from their latest album.",
@@ -133,11 +134,11 @@ const EventDetail = () => {
     },
     3: {
       id: 3,
-      title: "Classical Evening",
+      title: "Dean Lewis 's Band ",
       date: "2024-06-25",
       time: "19:30",
-      image: "/images/concert3.jpg",
-      artist: "Symphony Orchestra",
+      image: "/images/Dean-lewis.jpg",
+      artist: "Dean Lewis",
       price: "Free",
       genre: "Classical",
       description: "Experience the majesty of classical music with the Symphony Orchestra performing masterpieces from Mozart, Beethoven, and more.",
@@ -145,11 +146,11 @@ const EventDetail = () => {
     },
     4: {
       id: 4,
-      title: "Pop Extravaganza",
+      title: "Pop Extravaganza - Rihanna",
       date: "2024-07-01",
       time: "20:30",
-      image: "/images/concert4.jpg",
-      artist: "Luna Stars",
+      image: "/images/Rihanna.jpg",
+      artist: "Rihanna",
       price: "Free",
       genre: "Pop",
       description: "Luna Stars brings their chart-topping hits to this virtual spectacular, featuring stunning visuals and special guest appearances.",
@@ -157,11 +158,11 @@ const EventDetail = () => {
     },
     5: {
       id: 5,
-      title: "Electronic Dance Night",
+      title: "Electronic Dance Night with Black Pink",
       date: "2024-07-05",
       time: "22:00",
-      image: "/images/concert5.jpg",
-      artist: "DJ Pulse",
+      image: "./images/black-pink.jpg",
+      artist: "Black  Pink",
       price: "Free",
       genre: "Electronic",
       description: "Get ready to dance with DJ Pulse's immersive electronic music experience, featuring stunning visuals and bass-heavy beats.",

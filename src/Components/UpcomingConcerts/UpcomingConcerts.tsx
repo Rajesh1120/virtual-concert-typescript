@@ -91,28 +91,55 @@ const UpcomingConcerts = () => {
   const events: Event[] = [
     {
       id: 1,
-      title: "Summer Jazz Night",
+      title: "Billish Ellish concert",
       date: "2024-06-15",
       time: "20:00",
-      image: "/images/concert1.jpg",
-      artist: "Jazz Ensemble"
+      image: "/images/billieeilish.jpg",
+      artist: "Billish Eilish"
     },
     {
       id: 2,
-      title: "Rock Revolution",
+      title: "Taylor swift Era",
       date: "2024-06-20",
       time: "21:00",
-      image: "/images/concert2.jpg",
-      artist: "The Electric Stones"
+      image: "/images/taylorswift.jpg",
+      artist: "Taylor Swift"
     },
     {
       id: 3,
-      title: "Classical Evening",
+      title: "Dean Lewis 's Band ",
       date: "2024-06-25",
       time: "19:30",
-      image: "/images/concert3.jpg",
+      image: "/images/Dean-lewis.jpg",
       artist: "Symphony Orchestra"
+    },
+    {
+      id: 4,
+      title: "Pop Extravaganza - Rihanna",
+      date: "2024-07-01",
+      time: "20:30",
+      image: "/images/Rihanna.jpg",
+      artist: "Rihanna",
+      
+    },
+    {
+      id: 5,
+      title: "Electronic Dance Night with Black Pink",
+      date: "2024-07-05",
+      time: "22:00",
+      image: "./images/black-pink.jpg",
+      artist: "Black  Pink",
+      
+    },
+    {
+      id: 6,
+      title: "Folk Music Festival with Annie",
+      date: "2024-07-10",
+      time: "18:00",
+      image: "/images/annie.jpg",
+      artist: "Marshallow - annie",
     }
+  
   ];
 
   return (

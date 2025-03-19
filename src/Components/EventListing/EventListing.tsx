@@ -6,6 +6,7 @@ const EventListingContainer = styled.div`
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 3rem;
 `;
 
 const EventGrid = styled.div`
@@ -35,7 +36,9 @@ const EventImage = styled.img`
 const EventInfo = styled.div`
   padding: 1.5rem;
 `;
-
+const EventMainTitle=styled.h2`
+  color: ${({ theme })=> theme.colors.mainColor}
+`;
 const EventTitle = styled.h3`
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
@@ -74,7 +77,8 @@ const EventListing = () => {
       date: "2024-06-15",
       time: "20:00",
       image: "/images/billieeilish.jpg",
-      artist: "Billish Eilish"
+      artist: "Billish Eilish",
+      price: "Free",
     },
     {
       id: 2,
@@ -82,7 +86,8 @@ const EventListing = () => {
       date: "2024-06-20",
       time: "21:00",
       image: "/images/taylorswift.jpg",
-      artist: "Taylor Swift"
+      artist: "Taylor Swift",
+      price: "Free",
     },
     {
       id: 3,
@@ -90,7 +95,8 @@ const EventListing = () => {
       date: "2024-06-25",
       time: "19:30",
       image: "/images/Dean-lewis.jpg",
-      artist: "Symphony Orchestra"
+      artist: "Symphony Orchestra",
+      price: "Free",
     },
     {
       id: 4,
@@ -151,7 +157,9 @@ const EventListing = () => {
 
   return (
     <EventListingContainer>
+      <EventMainTitle>
       <h2>Upcoming Events</h2>
+      </EventMainTitle>
       <EventGrid>
         {events.map((event) => (
           <EventCard key={event.id}>

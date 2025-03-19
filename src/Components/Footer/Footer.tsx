@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const FooterContainer = styled.footer`
   background: ${({ theme }) => theme.colors.backgroundDark};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.secondary};
   padding: 4rem 2rem;
 `;
 
@@ -17,7 +17,7 @@ const FooterContent = styled.div`
 
 const FooterSection = styled.div`
   h3 {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.secondary};
     margin-bottom: 1rem;
   }
 `;
@@ -30,11 +30,11 @@ const LinkList = styled.ul`
     margin-bottom: 0.5rem;
     
     a {
-      color: ${({ theme }) => theme.colors.textSecondary};
+      color: ${({ theme }) => theme.colors.secondary};
       text-decoration: none;
       
       &:hover {
-        color: ${({ theme }) => theme.colors.primary};
+      color: #e31c79;
       }
     }
   }
@@ -46,11 +46,11 @@ const SocialLinks = styled.div`
   margin-top: 1rem;
   
   a {
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: 1.5rem;
     
     &:hover {
-      color: ${({ theme }) => theme.colors.primary};
+      color:${({theme}) => theme.colors.mainColor};
     }
   }
 `;
@@ -59,6 +59,10 @@ const NewsletterForm = styled.form`
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+`;
+const Head=styled.h3`
+    color:rgb(236, 12, 124) !important;
+
 `;
 
 const Input = styled.input`
@@ -70,14 +74,14 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
-  background: ${({ theme }) => theme.colors.primary};
+  background-color:  #f13b92;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   
   &:hover {
-    background: ${({ theme }) => theme.colors.primaryDark};
+    transform: scale(1.05);
   }
 `;
 
@@ -86,7 +90,9 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <FooterSection>
+        <Head>
           <h3>Quick Links</h3>
+        </Head>
           <LinkList>
             <li><a href="/about">About Us</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
@@ -96,7 +102,9 @@ const Footer = () => {
         </FooterSection>
         
         <FooterSection>
+          <Head>
           <h3>Contact Us</h3>
+          </Head>
           <p>Email: support@virtualconcert.com</p>
           <p>Phone: +1 (555) 123-4567</p>
           <SocialLinks>
@@ -108,10 +116,12 @@ const Footer = () => {
         </FooterSection>
         
         <FooterSection>
+          <Head>
           <h3>Newsletter</h3>
+          </Head>
           <p>Subscribe for concert updates and exclusive offers</p>
           <NewsletterForm>
-            <Input type="email" placeholder="Enter your email" />
+            <Input type="email" placeholder="Enter your email"  required/>
             <Button type="submit">Subscribe</Button>
           </NewsletterForm>
         </FooterSection>

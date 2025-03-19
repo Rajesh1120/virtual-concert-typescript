@@ -12,6 +12,7 @@ declare module 'styled-components' {
       border: string;
       text: string;
       textSecondary: string;
+      mainColor:string;
     }
   }
 }
@@ -26,6 +27,7 @@ export const theme: DefaultTheme = {
     primaryDark: '#333333',
     border: '#dddddd',
     text: '#000000',
+    mainColor: '#e31c79',
     textSecondary: '#666666',
   },
 };

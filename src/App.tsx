@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Header from './Components/Header/Header';
@@ -12,19 +12,33 @@ import Features from './Components/Feature/Features';
 import UpcomingConcerts from './Components/UpcomingConcerts/UpcomingConcerts';
 import Footer from './Components/Footer/Footer';
 
+interface activeLinks{
+    "Home": boolean,
+    "Events": boolean,
+    "About": boolean,
+    "Login": boolean,
+    "Artists": boolean
+}
 const App: React.FC = () => {
+  const [activeLink, setActiveLink] = useState<activeLinks>({
+    "Home": true,
+    "Events": false,
+    "About": false,
+    "Login": false,
+    "Artists": false,
+  })
   return (
     <ThemeProvider theme={theme}> 
       <Router>
         <GlobalStyle theme={theme} />
-        <Header />
+        <Header activeLink={activeLink} setActiveLink={setActiveLink}/>
         <Routes>
           <Route path="/" element={
             <>
-              <Hero />
+              <Hero setActiveLink={setActiveLink}/>
               <Features />
               <HowItWorks />
-              <UpcomingConcerts />
+              <UpcomingConcerts setActiveLink={setActiveLink}/>
             </>
           } />
           <Route path="/events" element={<EventListing />} />

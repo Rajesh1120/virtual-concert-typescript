@@ -10,6 +10,19 @@ interface Event {
   image: string;
   artist: string;
 }
+interface SetActiveProps {
+  setActiveLink: React.Dispatch<React.SetStateAction<activeLinks>>;
+}
+interface activeLinks {
+  "Home": boolean,
+  "Events": boolean,
+  "About": boolean,
+  "Login": boolean,
+  "Artists": boolean
+  
+}
+
+
 
 const Section = styled.section`
   padding: 4rem 2rem;
@@ -87,7 +100,12 @@ const ViewAllButton = styled(Link)`
   }
 `;
 
-const UpcomingConcerts = () => {
+const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
+
+  const handleClick=()=>{
+   setActiveLink({ Home: false,Events: true, About: false, Login: false, Artists: false})
+  }
+    
   const events: Event[] = [
     {
       id: 1,
@@ -147,7 +165,7 @@ const UpcomingConcerts = () => {
       <Container>
         <Title>Upcoming Concerts</Title>
         <Grid>
-          {events.slice(0, 3).map(event => (
+          {events.map(event => (
             <EventCard key={event.id} to={`/event/${event.id}`}>
               <EventImage src={event.image} alt={event.title} />
               <EventInfo>
@@ -164,7 +182,7 @@ const UpcomingConcerts = () => {
             </EventCard>
           ))}
         </Grid>
-        <ViewAllButton to="/events">See All Events</ViewAllButton>
+        <ViewAllButton onClick={handleClick} to="/events">See All Events</ViewAllButton>
       </Container>
     </Section>
   );

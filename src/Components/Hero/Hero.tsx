@@ -4,7 +4,15 @@ import styled from 'styled-components';
 
 interface HeroProps {
   backgroundImage?: string;
-  // onClick?: string
+  setActiveLink:React.Dispatch<React.SetStateAction<activeLinks>>
+}
+interface activeLinks {
+  "Home": boolean,
+  "Events": boolean,
+  "About": boolean,
+  "Login": boolean,
+  "Artists": boolean
+  
 }
 
 const HeroContainer = styled.div`
@@ -51,7 +59,8 @@ const HeroSubtitle = styled.p`
 `;
 
 const CTAButton = styled(Link)`
-  background: #e31c79;
+  
+  background-color:  #f13b92;
   color: #fff;
   padding: 1rem 2rem;
   text-decoration: none;
@@ -68,16 +77,19 @@ const CTAButton = styled(Link)`
 `;
 
 
-const Hero: React.FC<HeroProps> = ({ backgroundImage }) => {
+const Hero: React.FC<HeroProps> = ({ setActiveLink, backgroundImage }) => {
+  const handleClick=()=>{
+    setActiveLink({ Home: false,Events: true, About: false, Login: false, Artists: false})
+  }
   return (
     <HeroContainer>
-      <HeroBackground backgroundImage={backgroundImage} />
+      <HeroBackground setActiveLink ={setActiveLink} backgroundImage={backgroundImage} />
       <HeroContent>
         <HeroTitle>Experience Live Music Like Never Before</HeroTitle>
         <HeroSubtitle>
           Join thousands of music lovers in immersive virtual concerts from the comfort of your home
         </HeroSubtitle>
-        <CTAButton to={`/events`}>See Upcoming Shows</CTAButton>
+        <CTAButton onClick={handleClick} to={`/events`}>See Upcoming Shows</CTAButton>
       </HeroContent>
     </HeroContainer>
   );

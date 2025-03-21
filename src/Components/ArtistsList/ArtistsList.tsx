@@ -98,7 +98,6 @@ const artists=[{
     id: 4,
     next_concert: "Pop Extravaganza - Rihanna",
     date: "2024-07-01",
-    
     image: "/images/Rihanna.jpg",
     artist: "Rihanna",
     
@@ -115,7 +114,6 @@ const artists=[{
     id: 6,
     next_concert: "Folk Music Festival with Annie",
     date: "2024-07-10",
-   
     image: "/images/annie.jpg",
     artist: "Marshallow - annie",
     
@@ -124,7 +122,6 @@ const artists=[{
     id: 7,
     next_concert: "Hip Hop Showcase",
     date: "2024-07-15",
-   
     image: "/images/images-drangons.jpg",
     artist: "Images Drangons",
    

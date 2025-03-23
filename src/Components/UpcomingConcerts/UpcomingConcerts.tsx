@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { FaCalendar, FaClock } from 'react-icons/fa';
 
 interface Event {
@@ -21,7 +22,10 @@ interface activeLinks {
   "Artists": boolean
   
 }
-
+interface NextButtonProps{
+  i: number;
+  j: number
+}
 
 
 const Section = styled.section`
@@ -83,6 +87,13 @@ const EventDetail = styled.div`
     margin-right: 0.5rem;
   }
 `;
+const PrevButton= styled.button`
+  position : absolute;
+  
+  width: 50px;
+  height: 50px;
+  left:0;
+`
 
 const ViewAllButton = styled(Link)`
   display: block;
@@ -101,11 +112,19 @@ const ViewAllButton = styled(Link)`
 `;
 
 const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
-
+  const [nextButtonVal, setNextButtonVal]=useState<NextButtonProps>({
+    i: 0,
+    j: 3
+  })
   const handleClick=()=>{
    setActiveLink({ Home: false,Events: true, About: false, Login: false, Artists: false})
   }
     
+  const handleNextButton=()=>{
+    setNextButtonVal(prevbutton=>{
+        return ({i:prevbutton. j, j: prevbutton.j + 3})
+      })
+  }
   const events: Event[] = [
     {
       id: 1,
@@ -164,8 +183,10 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
     <Section>
       <Container>
         <Title>Upcoming Concerts</Title>
+        <PrevButton>Prev</PrevButton>
         <Grid>
-          {events.map(event => (
+          {nextButtonVal.j > events.length || nextButtonVal.i < 0 }
+          {events.length && events.splice(nextButtonVal.i, nextButtonVal.j).map(event => (
             <EventCard key={event.id} to={`/event/${event.id}`}>
               <EventImage src={event.image} alt={event.title} />
               <EventInfo>
@@ -181,7 +202,10 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
               </EventInfo>
             </EventCard>
           ))}
+        
+
         </Grid>
+        <PrevButton onClick={handleNextButton}>Next</PrevButton>
         <ViewAllButton onClick={handleClick} to="/events">See All Events</ViewAllButton>
       </Container>
     </Section>

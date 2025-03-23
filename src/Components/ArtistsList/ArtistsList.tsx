@@ -21,11 +21,14 @@ const ArtistContainer=styled.div`
 `;
 const ArtistGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+//   flex-direction: column;
+//   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  cursor: pointer;
 `;
 const ArtistCard = styled.div`
   background: ${({ theme }) => theme.colors.backgroundAlt};
+  display : flex;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,8 +39,8 @@ const ArtistCard = styled.div`
   }
 `;
 const ArtistImage = styled.img`
-  width: 100%;
-  height: 200px;
+  width: 500px;
+  height: 100%;
   object-fit: cover;
 `;
 const ArtistInfo = styled.div`
@@ -155,7 +158,8 @@ const ArtistsList: React.FC= ()=>{
                 {artists.map((artist)=> {
                 return (
                     <ArtistCard key={artist.id} >
-                        <ArtistImage src={artist.image} alt={artist.artist}></ArtistImage>
+                        <ArtistImage src={artist.image} alt={artist.artist}>
+                        </ArtistImage>
                         <ArtistInfo>
                             <ArtistName>
                                 <h3>{artist.artist}</h3>

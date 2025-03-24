@@ -79,7 +79,8 @@ const artists=[{
     date: "2024-06-15",
     image: "/images/billieeilish.jpg",
     artist: "Billish Eilish",
-    next_concert: "Billish Eilish Concert"
+    next_concert: "Billish Eilish Concert",
+    url:"https://en.wikipedia.org/wiki/Billie_Eilish"
   },
   {
     id: 2,
@@ -87,7 +88,7 @@ const artists=[{
     date: "2024-06-20",
     image: "/images/taylorswift.jpg",
     artist: "Taylor Swift",
-    
+    url:"https://en.wikipedia.org/wiki/Taylor_Swift"
   },
   {
     id: 3,
@@ -95,6 +96,7 @@ const artists=[{
     date: "2024-06-25",
     image: "/images/Dean-lewis.jpg",
     artist: "Dean Lewis",
+    url:"https://en.wikipedia.org/wiki/Dean_Lewis"
     
   },
   {
@@ -103,7 +105,7 @@ const artists=[{
     date: "2024-07-01",
     image: "/images/Rihanna.jpg",
     artist: "Rihanna",
-    
+    url:"https://en.wikipedia.org/wiki/Rihanna"
   },
   {
     id: 5,
@@ -111,15 +113,15 @@ const artists=[{
     date: "2024-07-05",
     image: "./images/black-pink.jpg",
     artist: "Black  Pink",
- 
+    url:"https://en.wikipedia.org/wiki/BlackPink"
   },
   {
     id: 6,
     next_concert: "Folk Music Festival with Annie",
     date: "2024-07-10",
     image: "/images/annie.jpg",
-    artist: "Marshallow - annie",
-    
+    artist: "Anne-Marie",
+    url:"https://en.wikipedia.org/wiki/Anne-Marie"
   },
   {
     id: 7,
@@ -127,7 +129,7 @@ const artists=[{
     date: "2024-07-15",
     image: "/images/images-drangons.jpg",
     artist: "Images Drangons",
-   
+   url:"https://en.wikipedia.org/wiki/Imagine_Dragons"
   },
   {
     id: 8,
@@ -135,7 +137,7 @@ const artists=[{
     date: "2024-07-20",
     image: "/images/sabrina-carpenter.jpg",
     artist: "Sabrina carpenter",
-    
+    url:"https://en.wikipedia.org/wiki/Sabrina_Carpenter"
   },
   {
     id: 9,
@@ -144,7 +146,7 @@ const artists=[{
     
     image: "/images/harry-styles.jpg",
     artist: "Harry styles",
-    
+    url:"https://en.wikipedia.org/wiki/Harry_Styles"
   }
 ]
 
@@ -172,7 +174,7 @@ const ArtistsList: React.FC= ()=>{
                                 <h4>Next-Concert Name :- </h4>
                                 {artist.next_concert}
                             </ArtistDetail>
-                            <ViewButton to={`/artists`}>About Artist</ViewButton>
+                            <ViewButton target="_blank" to={`${artist.url}`}>About Artist</ViewButton>
                         </ArtistInfo>
                     </ArtistCard>  
                     

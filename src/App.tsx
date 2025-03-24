@@ -37,7 +37,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={
             <>
-              <Hero setActiveLink={setActiveLink}/>
+              <Hero setActiveLink={setActiveLink} />
               <Features />
               <HowItWorks />
               <UpcomingConcerts setActiveLink={setActiveLink}/>

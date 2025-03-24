@@ -28,7 +28,7 @@ const HeroBackground = styled.div<HeroProps>`
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: ${props => `url(${props.backgroundImage || '/concert-background.jpg'})`};
+  background-image: ${props => `url(${props.backgroundImage || '/heroimages/second.jpeg'})`};
   background-size: cover;
   background-position: center;
   filter: brightness(0.6);

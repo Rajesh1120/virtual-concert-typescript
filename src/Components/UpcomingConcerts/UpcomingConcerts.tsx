@@ -209,24 +209,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
       image: "/images/annie.jpg",
       artist: "Marshallow - annie",
       
-    },{
-      id: 7,
-      title: "Folk Music Festival with Annie",
-      date: "2024-07-10",
-      time: "18:00",
-      image: "/images/annie.jpg",
-      artist: "Marshallow - annie",
-      
-    },
-    {
-      id: 8,
-      title: "Folk Music Festival with Annie",
-      date: "2024-07-10",
-      time: "18:00",
-      image: "/images/annie.jpg",
-      artist: "Marshallow - annie",
-      
-    },
+    }
     
   ];
 console.log(nextPrevButtonVal.j, nextPrevButtonVal.i)

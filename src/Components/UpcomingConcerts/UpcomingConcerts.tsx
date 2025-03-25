@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import { FaCalendar, FaClock, FaSadCry } from 'react-icons/fa';
-import { theme } from '../styles/theme';
+import { useState } from 'react';
+import { FaCalendar, FaClock } from 'react-icons/fa';
+// import { theme } from '../styles/theme';
 
 interface Event {
   id: number;

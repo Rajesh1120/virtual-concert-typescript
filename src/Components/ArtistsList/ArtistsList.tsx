@@ -2,15 +2,15 @@
 import styled from 'styled-components'
 import { FaCalendar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-interface AllArtistsList{
-    id: number;
-    artists: string;
-    image: string;
-    next_concert: string;
-    data: string;
+// import { useState } from 'react';
+// interface AllArtistsList{
+//     id: number;
+//     artists: string;
+//     image: string;
+//     next_concert: string;
+//     data: string;
 
-}
+// }
 
 const ArtistContainer=styled.div`
     max-width: 1200px;
@@ -151,7 +151,7 @@ const artists=[{
 ]
 
 const ArtistsList: React.FC= ()=>{
-    const [flipped , setFlipped]=useState(false)
+    
     return (
         
         <ArtistContainer>

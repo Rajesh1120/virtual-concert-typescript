@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { FaCalendar, FaClock, FaSadCry } from 'react-icons/fa';
+import { theme } from '../styles/theme';
 
 interface Event {
   id: number;
@@ -25,8 +26,8 @@ interface activeLinks {
 interface NextButtonProps{
   i: number;
   j: number;
-  disabled_prev?: string | undefined;
-  disabled_next?: boolean | undefined;
+  // disabled_prev?: string | undefined;
+  // disabled_next?: boolean | undefined;
 }
 
 
@@ -67,7 +68,7 @@ const EventCard = styled(Link)`
 
 const EventImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 300px;
   object-fit: cover;
 `;
 
@@ -93,17 +94,22 @@ const EventDetail = styled.div`
 const PrevButton= styled.button`
   position : absolute;
   padding: 1rem;
-  height: 75px;
+  height: 50px;
   left: 0;
   cursor:pointer;
-  disabled:true
+  border:none;
+  background-color:rgb(240, 95, 165) ;
+  color: white;
 `;
 const NextButton = styled.button`
   position: absolute;
   right:0;
   padding:1rem;
-  height: 75px;
+  height: 50px;
   cursor:pointer;
+  border:none;
+  background-color:rgb(240, 95, 165) ;
+  color: white;
 `;
 
 const ViewAllButton = styled(Link)`
@@ -126,8 +132,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
   const [nextPrevButtonVal, setNextPrevButtonVal]=useState<NextButtonProps>({
     i: 0,
     j: 3,
-    disabled_next:false,
-    disabled_prev:"disabled",
+    
   })
 
 
@@ -136,19 +141,20 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
   }
     
   const handleNextButton=()=>{
-    setNextPrevButtonVal(prevbutton=>{
-      if (prevbutton.i >= 0 && prevbutton.j < events.length){
-        return ({i:prevbutton.j, j: prevbutton.j + 3 , disabled_prev: "", disabled_next:false})
-      } else{
-        return ({i:0, j:3, disabled_prev: "disabled"})
-      }
+      setNextPrevButtonVal(prevbutton=>{
+        if(prevbutton.j + 3 > events.length){
+          return ({i:prevbutton.j, j: prevbutton.j + events.length - prevbutton.j })
+        }else{
+          return ({i:prevbutton.j, j: prevbutton.j + 3  })
+        }
         
       })
+    
+    
   }
   const handlePrevButton = () => {
     
-    setNextPrevButtonVal(prevbutton=> {
-      
+    setNextPrevButtonVal(prevbutton => {
       return ({i:prevbutton.i-3, j: prevbutton.i})
     })
   }
@@ -203,20 +209,38 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
       image: "/images/annie.jpg",
       artist: "Marshallow - annie",
       
-    }
-  
+    },{
+      id: 7,
+      title: "Folk Music Festival with Annie",
+      date: "2024-07-10",
+      time: "18:00",
+      image: "/images/annie.jpg",
+      artist: "Marshallow - annie",
+      
+    },
+    {
+      id: 8,
+      title: "Folk Music Festival with Annie",
+      date: "2024-07-10",
+      time: "18:00",
+      image: "/images/annie.jpg",
+      artist: "Marshallow - annie",
+      
+    },
+    
   ];
-
+console.log(nextPrevButtonVal.j, nextPrevButtonVal.i)
   return (
     <Section>
       
       <Container>
         <Title>Upcoming Concerts</Title>
-        {events.length > 0 &&  nextPrevButtonVal.j <= events.length && nextPrevButtonVal.i >= 0 ?
+        {events.length > 0 &&  nextPrevButtonVal.j <= events.length && nextPrevButtonVal.i >= 0 &&
         
-            <Grid>
-              <PrevButton onClick={handlePrevButton} >Prev</PrevButton>
-            {events.splice(nextPrevButtonVal.i, nextPrevButtonVal.j).map(event => (
+          <Grid>
+              {nextPrevButtonVal.i <= 0 ? <PrevButton onClick={handlePrevButton} disabled>Prev</PrevButton>:
+              <PrevButton onClick={handlePrevButton} >Prev</PrevButton>}
+            {events.slice(nextPrevButtonVal.i, nextPrevButtonVal.j).map(event => (
               <EventCard key={event.id} to={`/event/${event.id}`}>
                 <EventImage src={event.image} alt={event.title} />
                 <EventInfo>
@@ -232,19 +256,12 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
                 </EventInfo>
               </EventCard>
             ))}
-            <NextButton onClick={handleNextButton}>Next</NextButton>
-          </Grid>
-          
-       :
-          <Grid>
-            <h2>Sorry , No Upcoming Concerts</h2>
-            
+            {nextPrevButtonVal.j >= events.length ? <NextButton onClick={handleNextButton} disabled>Next</NextButton> : 
+            <NextButton onClick={handleNextButton} >Next</NextButton>}
           </Grid>
        }
-        
         <ViewAllButton onClick={handleClick} to="/events">See All Events</ViewAllButton>
       </Container>
-      
     </Section>
   );
 };

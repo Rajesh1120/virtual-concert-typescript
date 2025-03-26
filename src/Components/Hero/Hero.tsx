@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+
 interface HeroProps {
   backgroundImage?: string;
   setActiveLink:React.Dispatch<React.SetStateAction<activeLinks>>
@@ -84,6 +85,7 @@ const Hero: React.FC<HeroProps> = ({ setActiveLink, backgroundImage }) => {
   return (
     <HeroContainer>
       <HeroBackground setActiveLink ={setActiveLink} backgroundImage={backgroundImage} />
+      
       <HeroContent>
         <HeroTitle>Experience Live Music Like Never Before</HeroTitle>
         <HeroSubtitle>

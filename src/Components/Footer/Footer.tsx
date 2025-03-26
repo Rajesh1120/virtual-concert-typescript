@@ -87,7 +87,12 @@ const Button = styled.button`
 
 const Footer = () => {
   return (
+    
     <FooterContainer>
+      <video width="600" controls  autoPlay loop muted>
+      <source src="/heroimages/herovideo.mov" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
       <FooterContent>
         <FooterSection>
         <Head>

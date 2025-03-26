@@ -19,7 +19,7 @@ interface activeLinks {
   "Home": boolean,
   "Events": boolean,
   "About": boolean,
-  "Login": boolean,
+  "Logout": boolean,
   "Artists": boolean
   
 }
@@ -137,7 +137,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
 
 
   const handleClick=()=>{
-   setActiveLink({ Home: false,Events: true, About: false, Login: false, Artists: false})
+   setActiveLink({ Home: false,Events: true, About: false, Logout: false, Artists: false})
   }
     
   const handleNextButton=()=>{

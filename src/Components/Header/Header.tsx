@@ -39,7 +39,7 @@ interface activeLinks {
   "Home":boolean,
   "Events": boolean,
   "About": boolean,
-  "Login": boolean,
+  "Logout": boolean,
   "Artists": boolean
   
 }
@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
       Home: link === "Home",
       Events: link === "Events",
       About: link === "About",
-      Login: link === "Login",
+      Logout: link === "Logout",
       Artists: link === "Artists",
     });
   };
@@ -126,11 +126,11 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
           About
         </NavLink>
         <NavLink
-          to="/login"
-          isActive={activeLink.Login}
-          onClick={() => handleLinkClick("Login")}
+          to="/logout"
+          isActive={activeLink.Logout}
+          onClick={() => handleLinkClick("Logout")}
         >
-          Login
+          Logout
         </NavLink>
         <CTAButton to="/signup">Join Concert Now</CTAButton>
       </Nav>

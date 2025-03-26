@@ -10,7 +10,7 @@ interface activeLinks {
   Home: boolean;
   Events: boolean;
   About: boolean;
-  Login: boolean;
+  Logout: boolean;
   Artists: boolean;
 }
 
@@ -91,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({ setActiveLink }) => {
       Home: false,
       Events: true,
       About: false,
-      Login: false,
+      Logout: false,
       Artists: false,
     });
   };
@@ -106,7 +106,6 @@ const Hero: React.FC<HeroProps> = ({ setActiveLink }) => {
         loop={true}
         onEnded={handleVideoEnd}
       />
-
       <HeroContent>
         <HeroTitle>Experience Live Music Like Never Before</HeroTitle>
         <HeroSubtitle>

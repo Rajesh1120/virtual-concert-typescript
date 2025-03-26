@@ -158,7 +158,7 @@ const EventListing = () => {
   return (
     <EventListingContainer>
       <EventMainTitle>
-      <h2>Upcoming Events</h2>
+          Upcoming Events
       </EventMainTitle>
       <EventGrid>
         {events.map((event) => (

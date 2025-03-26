@@ -1,19 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 interface HeroProps {
-  backgroundImage?: string;
-  setActiveLink:React.Dispatch<React.SetStateAction<activeLinks>>
+  setActiveLink: React.Dispatch<React.SetStateAction<activeLinks>>;
 }
+
 interface activeLinks {
-  "Home": boolean,
-  "Events": boolean,
-  "About": boolean,
-  "Login": boolean,
-  "Artists": boolean
-  
+  Home: boolean;
+  Events: boolean;
+  About: boolean;
+  Login: boolean;
+  Artists: boolean;
 }
 
 const HeroContainer = styled.div`
@@ -23,15 +21,13 @@ const HeroContainer = styled.div`
   overflow: hidden;
 `;
 
-const HeroBackground = styled.div<HeroProps>`
+const VideoBackground = styled.video`
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: ${props => `url(${props.backgroundImage || '/heroimages/second.jpeg'})`};
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: brightness(0.6);
 `;
 
@@ -60,8 +56,7 @@ const HeroSubtitle = styled.p`
 `;
 
 const CTAButton = styled(Link)`
-  
-  background-color:  #f13b92;
+  background-color: #f13b92;
   color: #fff;
   padding: 1rem 2rem;
   text-decoration: none;
@@ -77,24 +72,53 @@ const CTAButton = styled(Link)`
   }
 `;
 
+const Hero: React.FC<HeroProps> = ({ setActiveLink }) => {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-const Hero: React.FC<HeroProps> = ({ setActiveLink, backgroundImage }) => {
-  const handleClick=()=>{
-    setActiveLink({ Home: false,Events: true, About: false, Login: false, Artists: false})
-  }
+  const videos = [
+    "/heroimages/herovideo.mov",
+    "/heroimages/secondvideo.mov",
+    
+  ];
+
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+  };
+
+
+  const handleClick = () => {
+    setActiveLink({
+      Home: false,
+      Events: true,
+      About: false,
+      Login: false,
+      Artists: false,
+    });
+  };
+
   return (
     <HeroContainer>
-      <HeroBackground setActiveLink ={setActiveLink} backgroundImage={backgroundImage} />
-      
+      {/* Video Background - Plays one after another */}
+      <VideoBackground
+        src={videos[currentVideoIndex]}
+        autoPlay
+        muted
+        loop={true}
+        onEnded={handleVideoEnd}
+      />
+
       <HeroContent>
         <HeroTitle>Experience Live Music Like Never Before</HeroTitle>
         <HeroSubtitle>
-          Join thousands of music lovers in immersive virtual concerts from the comfort of your home
+          Join thousands of music lovers in immersive virtual concerts from the
+          comfort of your home.
         </HeroSubtitle>
-        <CTAButton onClick={handleClick} to={`/events`}>See Upcoming Shows</CTAButton>
+        <CTAButton onClick={handleClick} to={`/events`}>
+          See Upcoming Shows
+        </CTAButton>
       </HeroContent>
     </HeroContainer>
   );
 };
 
-export default Hero; 
+export default Hero;

@@ -89,14 +89,11 @@ const Footer = () => {
   return (
     
     <FooterContainer>
-      <video width="600" controls  autoPlay loop muted>
-      <source src="/heroimages/herovideo.mov" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+      
       <FooterContent>
         <FooterSection>
         <Head>
-          <h3>Quick Links</h3>
+          Quick Links
         </Head>
           <LinkList>
             <li><a href="/about">About Us</a></li>
@@ -108,7 +105,7 @@ const Footer = () => {
         
         <FooterSection>
           <Head>
-          <h3>Contact Us</h3>
+          Contact Us
           </Head>
           <p>Email: support@virtualconcert.com</p>
           <p>Phone: +1 (555) 123-4567</p>
@@ -122,7 +119,7 @@ const Footer = () => {
         
         <FooterSection>
           <Head>
-          <h3>Newsletter</h3>
+            Newsletter
           </Head>
           <p>Subscribe for concert updates and exclusive offers</p>
           <NewsletterForm>

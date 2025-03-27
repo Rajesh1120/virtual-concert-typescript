@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import React from "react";
 
 const LoginForm = styled.div`
     color: white;
@@ -47,7 +48,7 @@ const Login = () =>{
             <label>Password: </label>
             <Input></Input>
             <SubmitButton to={"/"}>Login</SubmitButton>
-            <label>Don't have an account? <Anchor to={"/register"}>Register</Anchor></label>
+            <label>Don't have an account? <Anchor style={{ color: '#e31c79' }} to={"/register"}>Register</Anchor></label>
         </LoginForm>
 
     )

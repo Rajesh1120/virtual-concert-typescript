@@ -14,11 +14,12 @@ const LoginForm = styled.div`
     flex-direction: column;
     width : 500px;
     height: 550px;
-    border: 2px solid white;
+    border: 4px solid white;
     justify-content : center;
     padding: 4rem;
     position : absolute;
     top:15%;
+    border-radius: 10px;
     left:35%;
 `;
 const  Anchor=styled(Link)`
@@ -58,6 +59,8 @@ const Register = () =>{
         if (userData.password !== userData.conformpassword){
             console.log("your password is don't match ")
         }
+
+        // after the validating the form then only u have to store the userdata in database
     }
     const handleChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
         const {name , value}= e.target;

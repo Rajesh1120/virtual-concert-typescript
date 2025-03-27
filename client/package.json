@@ -1,25 +1,28 @@
 {
-  "name": "virtual-concert",
-  "version": "0.1.0",
+  "name": "virtual-concert-typescript",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
+  "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "@types/react": "^19.0.10",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
+    "@types/react-icons": "^2.2.7",
     "@types/styled-components": "^5.1.34",
+    "@types/testing-library__react": "^10.0.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0",
-    "react-router-dom": "^7.2.0",
-    "react-scripts": "5.0.1",
-    "styled-components": "^6.1.15",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.30.0",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^5.3.11",
+    "tsc": "^2.0.4",
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",

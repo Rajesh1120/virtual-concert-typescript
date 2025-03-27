@@ -13,6 +13,7 @@ import Features from './Components/Feature/Features';
 import UpcomingConcerts from './Components/UpcomingConcerts/UpcomingConcerts';
 import Footer from './Components/Footer/Footer';
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 
 interface activeLinks{
@@ -54,6 +55,7 @@ const App: React.FC = () => {
         {isLoggedIn && <Header activeLink={activeLink} setActiveLink={setActiveLink}/>}
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/home" element={
             <ProtectedRouter element={
               <>

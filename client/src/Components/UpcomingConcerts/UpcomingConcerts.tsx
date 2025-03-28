@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { FaCalendar, FaClock } from 'react-icons/fa';
+import { FaCalendar, FaClock } from 'react-icons/fa6';
+import React from 'react';
 // import { theme } from '../styles/theme';
 
 interface Event {
@@ -91,6 +92,11 @@ const EventDetail = styled.div`
     margin-right: 0.5rem;
   }
 `;
+
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
+
 const PrevButton= styled.button`
   position : absolute;
   padding: 1rem;
@@ -229,11 +235,11 @@ console.log(nextPrevButtonVal.j, nextPrevButtonVal.i)
                 <EventInfo>
                   <EventTitle>{event.title}</EventTitle>
                   <EventDetail>
-                    <FaCalendar />
+                  <IconWrapper icon={FaCalendar as React.ComponentType} />
                     {new Date(event.date).toLocaleDateString()}
                   </EventDetail>
                   <EventDetail>
-                    <FaClock />
+                    <IconWrapper icon={FaClock as React.ComponentType} />
                     {event.time}
                   </EventDetail>
                 </EventInfo>

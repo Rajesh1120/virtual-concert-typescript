@@ -1,6 +1,6 @@
-
 import styled from 'styled-components'
-import { FaCalendar } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa6';
+import React from 'react';
 import { Link } from 'react-router-dom';
 // import { useState } from 'react';
 // interface AllArtistsList{
@@ -74,6 +74,9 @@ const ViewButton = styled(Link)`
     background: ${({ theme }) => theme.colors.primaryDark};
   }
 `;
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
 const artists=[{
     id: 1,
     date: "2024-06-15",
@@ -167,7 +170,7 @@ const ArtistsList: React.FC= ()=>{
                                 <h3>{artist.artist}</h3>
                             </ArtistName>
                             <ArtistDetail>
-                                <FaCalendar />
+                                <IconWrapper icon={FaCalendar as React.ElementType } />
                                 {new Date(artist.date).toLocaleDateString()}
                             </ArtistDetail>
                             <ArtistDetail>

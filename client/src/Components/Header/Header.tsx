@@ -3,12 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-// interface NavLinkProps {
-//   to: string;
-//   children: React.ReactNode;
-//   isActive: boolean;
-//   setActiveLink: (link: string) => void;
-// }
+interface NavLinkProps {
+  to: string;
+  children: React.ReactNode;
+  isActive: boolean;
+  setActiveLink: (link: string) => void;
+}
 
 const HeaderContainer = styled.header`
   position: fixed;

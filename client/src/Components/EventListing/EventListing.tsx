@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaCalendar, FaClock, FaTicketAlt } from 'react-icons/fa';
+import { FaCalendar, FaClock, FaTicket } from 'react-icons/fa6';
 
 const EventListingContainer = styled.div`
   padding: 2rem;
@@ -55,6 +55,10 @@ const EventDetail = styled.div`
     margin-right: 0.5rem;
   }
 `;
+
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
 
 const ViewButton = styled(Link)`
   display: inline-block;
@@ -168,15 +172,15 @@ const EventListing = () => {
             <EventInfo>
               <EventTitle>{event.title}</EventTitle>
               <EventDetail>
-                <FaCalendar />
+                <IconWrapper icon={FaCalendar as React.ElementType} />
                 {new Date(event.date).toLocaleDateString()}
               </EventDetail>
               <EventDetail>
-                <FaClock />
+                <IconWrapper icon={FaClock as React.ElementType} />
                 {event.time}
               </EventDetail>
               <EventDetail>
-                <FaTicketAlt />
+                <IconWrapper icon={FaTicket as React.ElementType} />
                 {event.price}
               </EventDetail>
               <ViewButton to={`/event/${event.id}`}>View Event</ViewButton>

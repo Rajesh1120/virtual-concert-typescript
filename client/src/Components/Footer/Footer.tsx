@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa6';
+import React from 'react';
 
 const FooterContainer = styled.footer`
   background: ${({ theme }) => theme.colors.backgroundDark};
@@ -85,6 +86,10 @@ const Button = styled.button`
   }
 `;
 
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
+
 const Footer = () => {
   return (
     
@@ -110,10 +115,10 @@ const Footer = () => {
           <p>Email: support@virtualconcert.com</p>
           <p>Phone: +1 (555) 123-4567</p>
           <SocialLinks>
-            <a href="https://www.facebook.com/"><FaFacebook /></a>
-            <a href="https://www.twitter.com"><FaTwitter /></a>
-            <a href="https://www.Instagram.com/"><FaInstagram /></a>
-            <a href="https://www.youtube.com/"><FaYoutube /></a>
+            <a href="https://www.facebook.com/"><IconWrapper icon={FaFacebook as React.ElementType } /></a>
+            <a href="https://www.twitter.com"><IconWrapper icon={FaTwitter as React.ElementType} /></a>
+            <a href="https://www.Instagram.com/"><IconWrapper icon={FaInstagram as React.ElementType} /></a>
+            <a href="https://www.youtube.com/"><IconWrapper icon={FaYoutube as React.ElementType} /></a>
           </SocialLinks>
         </FooterSection>
         

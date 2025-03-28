@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { FaUserPlus, FaSearch, FaMusic } from 'react-icons/fa';
+import { FaUserPlus, FaMagnifyingGlass, FaMusic } from 'react-icons/fa6';
+import React from 'react';
 
 const HowItWorksSection = styled.section`
   padding: 4rem 2rem;
@@ -41,23 +42,27 @@ const StepDescription = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
+
 const HowItWorks = () => {
   return (
     <HowItWorksSection>
       <Title>How It Works</Title>
       <StepsContainer>
         <Step>
-          <FaUserPlus />
+          <IconWrapper icon={FaUserPlus as React.ElementType} />
           <StepTitle>Sign Up</StepTitle>
           <StepDescription>Sign up or log in to your account</StepDescription>
         </Step>
         <Step>
-          <FaSearch />
+          <IconWrapper icon={FaMagnifyingGlass as React.ElementType} />
           <StepTitle>Browse Concerts</StepTitle>
           <StepDescription>Browse upcoming live concerts</StepDescription>
         </Step>
         <Step>
-          <FaMusic />
+          <IconWrapper icon={FaMusic as React.ElementType} />
           <StepTitle>Enjoy the Show</StepTitle>
           <StepDescription>Join the concert and enjoy live performances</StepDescription>
         </Step>

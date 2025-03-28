@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { FaCalendar, FaClock, FaTicketAlt, FaUser, FaMusic } from 'react-icons/fa';
+import { FaClock, FaTicket, FaUser, FaMusic, FaCalendar } from 'react-icons/fa6';
+import React from 'react';
 
 interface Event {
   id: number;
@@ -102,6 +103,9 @@ const StreamIframe = styled.iframe`
   border: none;
 `;
 
+const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
+  return Icon ? <Icon /> : null;
+};
 const EventDetail = () => {
   const { id } = useParams();
   const [hasTicket, setHasTicket] = useState(false);
@@ -248,23 +252,23 @@ const EventDetail = () => {
         <EventInfo>
           <EventTitle>{event.title}</EventTitle>
           <EventDetailItem>
-            <FaCalendar />
-            {new Date(event.date).toLocaleDateString()}
+            <IconWrapper icon={FaCalendar as React.ElementType} />
+            <span>{new Date(event.date).toLocaleDateString()}</span>
           </EventDetailItem>
           <EventDetailItem>
-            <FaClock />
+            <IconWrapper icon={FaClock as React.ElementType} />
             {event.time}
           </EventDetailItem>
           <EventDetailItem>
-            <FaUser />
+            <IconWrapper icon={FaUser as React.ElementType} />
             {event.artist}
           </EventDetailItem>
           <EventDetailItem>
-            <FaMusic />
+            <IconWrapper icon={FaMusic as React.ElementType} />
             {event.genre}
           </EventDetailItem>
           <EventDetailItem>
-            <FaTicketAlt />
+            <IconWrapper icon={FaTicket as React.ElementType} />
             {event.price}
           </EventDetailItem>
           

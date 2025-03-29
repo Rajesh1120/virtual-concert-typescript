@@ -33,7 +33,7 @@ const useAuth=()=>useContext(AuthContext)
 
 const ProtectedRouter :React.FC<{ element: JSX.Element }>= ({ element }) => {
   const { isLoggedIn } = useAuth();
-  return isLoggedIn ? element : <Navigate to="/" />;
+  return isLoggedIn ? element : <Navigate to="/home" />;
 };
 
 const App: React.FC = () => {
@@ -52,9 +52,9 @@ const App: React.FC = () => {
     <AuthContext.Provider value = {{isLoggedIn, login, logout}}>
       <Router>
         <GlobalStyle theme={theme} />
-        {isLoggedIn && <Header activeLink={activeLink} setActiveLink={setActiveLink}/>}
+        {isLoggedIn && <Header activeLink={activeLink} setActiveLink={setActiveLink} Loggedout={logout}/>}
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login LoggingFunc={login} Loggedin={isLoggedIn}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={
             <ProtectedRouter element={

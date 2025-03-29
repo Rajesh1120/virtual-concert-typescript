@@ -1,7 +1,7 @@
 // Header.tsx
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useActionData, useNavigate } from 'react-router-dom';
 
 interface NavLinkProps {
   to: string;
@@ -79,9 +79,11 @@ const CTAButton = styled(Link)`
 interface HeaderProps {
   activeLink: activeLinks;
   setActiveLink: React.Dispatch<React.SetStateAction<activeLinks>>;
+  Loggedout:()=> void;
 }
 
-const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
+const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout }) => {
+  const navigate=useNavigate();
   const handleLinkClick = (link: keyof activeLinks) => {
     setActiveLink({
       Home: link === "Home",
@@ -90,6 +92,11 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
       Logout: link === "Logout",
       Artists: link === "Artists",
     });
+    if (link === "Logout"){
+      Loggedout();
+      navigate("/login")
+
+    }
   };
 
   return (
@@ -97,7 +104,7 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
       <Logo to="/">VirtualConcert</Logo>
       <Nav>
       <NavLink
-          to="/"
+          to="/home"
           isActive={activeLink.Home}
           onClick={() => handleLinkClick("Home")}
         >
@@ -126,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink }) => {
           About
         </NavLink>
         <NavLink
-          to="/logout"
+          to="/login"
           isActive={activeLink.Logout}
           onClick={() => handleLinkClick("Logout")}
         >

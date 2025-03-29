@@ -53,11 +53,32 @@ const Register = () =>{
         password:"",
         conformpassword:"",
     })
-    const handleSubmit=(e:FormEvent)=>{
+    const handleSubmit= async (e:FormEvent)=>{
         e.preventDefault();
         // console.log(userData)
         if (userData.password !== userData.conformpassword){
             console.log("your password is don't match ")
+        }
+        else{
+            try{
+            const response= await fetch('http://localhost:5001/api/register',{
+                method:'POST',
+                headers:{
+                    'Content-Type':"application/json"
+                },
+                body: JSON.stringify({
+                    email: userData.email,
+                    password:userData.password
+                })
+            })
+                const data = await response.json()
+                console.log(data)
+            }
+            catch(error){
+                console.error("Error : ",error)
+                
+            }
+            
         }
 
         // after the validating the form then only u have to store the userdata in database

@@ -1,24 +1,22 @@
 import express from 'express'
 import authRoutes from './routes/auth';
 import cors from 'cors';
+import dotenv from 'dotenv'
+import connectDB from './config/db';
 
 const app=express();
 
 const PORT=5001
-// const corsOptions = {
-//     origin: 'http://localhost:3000',  // Replace with your frontend URL (if any)
-//     methods: ['GET', 'POST'],
-//     allowedHeaders: ['Content-Type'],
-//   };
+dotenv.config()
 
-app.use(express.json())
+
+
 app.use(cors())
-app.get("/register", (req, res)=>{
-    console.log('Received registration data:', req.body);  // Log the request body for debugging
-  res.send('Registration route hit');
-})
+app.use(express.json())
 
-// app.use("/api", authRoutes)
-app.listen(()=> {
+connectDB();
+app.use("/api", authRoutes)
+
+app.listen(PORT,()=> {
     console.log(`server running ${PORT}`);
 });

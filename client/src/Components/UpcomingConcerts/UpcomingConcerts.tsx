@@ -218,7 +218,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
     }
     
   ];
-console.log(nextPrevButtonVal.j, nextPrevButtonVal.i)
+
   return (
     <Section>
       

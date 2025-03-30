@@ -53,10 +53,10 @@ interface LoggedinProps{
 const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
     const navigate=useNavigate();
      const [userData, setUserData] = useState<UserDataLogin>({
-             email:"",
-             password:""
+             email:"rajeshn@gmail.com",
+             password:"Rajesh@035"
          })
-        console.log(Loggedin)
+        // console.log(Loggedin)
          const handleSubmit= async (e:FormEvent)=>{
              e.preventDefault();
              // console.log(userData)
@@ -72,8 +72,10 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
                     })
                 })
                 const data=await response.json()
-                console.log(data)
+                // console.log(data)
                 if (data.message === "Login successful"){
+                    // console.log(data.token)
+                    // localStorage.setItem("token",data.token)
                     LoggingFunc();
                     navigate("/home")
                 }

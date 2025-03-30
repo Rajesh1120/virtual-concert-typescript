@@ -54,7 +54,7 @@ const App: React.FC = () => {
         <GlobalStyle theme={theme} />
         {isLoggedIn && <Header activeLink={activeLink} setActiveLink={setActiveLink} Loggedout={logout}/>}
         <Routes>
-          <Route path="/login" element={<Login LoggingFunc={login} Loggedin={isLoggedIn}/>} />
+          <Route path="/" element={<Login LoggingFunc={login} Loggedin={isLoggedIn}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={
             <ProtectedRouter element={

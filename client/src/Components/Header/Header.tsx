@@ -133,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
           About
         </NavLink>
         <NavLink
-          to="/login"
+          to="/"
           isActive={activeLink.Logout}
           onClick={() => handleLinkClick("Logout")}
         >

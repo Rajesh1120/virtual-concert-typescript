@@ -27,9 +27,12 @@ interface activeLinks {
 interface NextButtonProps{
   i: number;
   j: number;
-  // disabled_prev?: string | undefined;
-  // disabled_next?: boolean | undefined;
+  
 }
+interface PrevButtonProps{
+  edgecase?:boolean;
+}
+
 
 
 const Section = styled.section`
@@ -97,15 +100,18 @@ const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
   return Icon ? <Icon /> : null;
 };
 
-const PrevButton= styled.button`
+const PrevButton= styled.button<PrevButtonProps>`
   position : absolute;
   padding: 1rem;
   height: 50px;
   left: 0;
   cursor:pointer;
   border:none;
-  background-color:rgb(240, 95, 165) ;
+  background-color: ${(({edgecase})=>(edgecase? "rgb(202, 107, 153)": "rgb(240, 95, 165)"))}
+
   color: white;
+  
+    
 `;
 const NextButton = styled.button`
   position: absolute;
@@ -140,6 +146,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
     j: 3,
     
   })
+  const [edgecase, setEdgeCase]=useState<PrevButtonProps>({edgecase:false});
 
 
   const handleClick=()=>{
@@ -153,16 +160,21 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
         }else{
           return ({i:prevbutton.j, j: prevbutton.j + 3  })
         }
-        
       })
     
     
   }
   const handlePrevButton = () => {
+    if (nextPrevButtonVal.i <=0){
+      setEdgeCase({edgecase:true})
+    }
+    else{
+      setNextPrevButtonVal(prevbutton => {
+        return ({i:prevbutton.i-3, j: prevbutton.i})
+      })
+      setEdgeCase({edgecase:false})
+    }
     
-    setNextPrevButtonVal(prevbutton => {
-      return ({i:prevbutton.i-3, j: prevbutton.i})
-    })
   }
   const events: Event[] = [
     {
@@ -227,8 +239,8 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
         {events.length > 0 &&  nextPrevButtonVal.j <= events.length && nextPrevButtonVal.i >= 0 &&
         
           <Grid>
-              {nextPrevButtonVal.i <= 0 ? <PrevButton onClick={handlePrevButton} disabled>Prev</PrevButton>:
-              <PrevButton onClick={handlePrevButton} >Prev</PrevButton>}
+              {nextPrevButtonVal.i <= 0 ? <PrevButton edgecase onClick={handlePrevButton} disabled>Prev</PrevButton>:
+              <PrevButton onClick={handlePrevButton} edgecase>Prev</PrevButton>}
             {events.slice(nextPrevButtonVal.i, nextPrevButtonVal.j).map(event => (
               <EventCard key={event.id} to={`/event/${event.id}`}>
                 <EventImage src={event.image} alt={event.title} />

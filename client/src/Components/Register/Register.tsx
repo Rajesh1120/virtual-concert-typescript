@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, {FormEvent, useState} from 'react'
 import styled from "styled-components";
+import { toast } from 'react-toastify'
 
 
 interface UserDataRegister{
@@ -72,10 +73,11 @@ const Register = () =>{
                 })
             })
                 const data = await response.json()
-                console.log(data)
+                toast.success("Created Successfully", data)
             }
             catch(error){
-                console.error("Error : ",error)
+                toast.error("Something went wrong")
+                console.error("Login Error: ", error)
                 
             }
             

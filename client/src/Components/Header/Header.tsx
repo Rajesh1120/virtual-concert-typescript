@@ -1,7 +1,8 @@
 // Header.tsx
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useActionData, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
 
 interface NavLinkProps {
   to: string;
@@ -92,8 +93,18 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
       Logout: link === "Logout",
       Artists: link === "Artists",
     });
+    console.log("inside")
     if (link === "Logout"){
+      setActiveLink({
+        Home: true,
+        Events: false,
+        About: false,
+        Logout: false,
+        Artists: false
+      });
+      toast.success("You logged successfully")
       Loggedout();
+
       navigate("/login")
 
     }
@@ -135,11 +146,11 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
         <NavLink
           to="/"
           isActive={activeLink.Logout}
-          onClick={() => handleLinkClick("Logout")}
+          onClick={()=>{handleLinkClick("Logout")}}
         >
           Logout
         </NavLink>
-        <CTAButton to="/signup">Join Concert Now</CTAButton>
+        <CTAButton to="/join-concert">Join Concert Now</CTAButton>
       </Nav>
     </HeaderContainer>
   );

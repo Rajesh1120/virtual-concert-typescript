@@ -1,6 +1,8 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import React , { useState, FormEvent, useContext }from "react";
+import React , { useState, FormEvent } from "react";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 interface UserDataLogin{
@@ -52,6 +54,9 @@ interface LoggedinProps{
 }
 const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
     const navigate=useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/home";
+    
      const [userData, setUserData] = useState<UserDataLogin>({
              email:"rajeshn@gmail.com",
              password:"Rajesh@035"
@@ -72,18 +77,24 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
                     })
                 })
                 const data=await response.json()
+                
+                
                 // console.log(data)
                 if (data.message === "Login successful"){
                     // console.log(data.token)
                     // localStorage.setItem("token",data.token)
+                    localStorage.setItem("token", data.token);
+                    toast.success("Login Successfully");
                     LoggingFunc();
-                    navigate("/home")
+                    
+                    // Navigate to the page the user was trying to access, or home if none
+                    navigate(from, { replace: true });
                 }
                 // 
                 // <Navigate to ="/home" />
 
             }catch(error){
-                console.error(error)
+                console.error("Something went wrong", error);
             }
              // after the validating the form then only u have to store the userdata in database
          }

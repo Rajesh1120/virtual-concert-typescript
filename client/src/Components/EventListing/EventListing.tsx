@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaCalendar, FaClock, FaTicket } from 'react-icons/fa6';
+import { FaCalendar, FaClock, FaTicket, FaVideo } from 'react-icons/fa6';
 
 const EventListingContainer = styled.div`
   padding: 2rem;
@@ -14,6 +14,7 @@ const EventGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const EventCard = styled.div`
@@ -74,12 +75,50 @@ const ViewButton = styled(Link)`
   }
 `;
 
+const WatchButton = styled.a`
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: ${({ theme }) => theme.colors.mainColor};
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const TabContainer = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const Tab = styled.div<{ active: boolean }>`
+  padding: 1rem 2rem;
+  cursor: pointer;
+  color: ${({ active, theme }) => active ? theme.colors.mainColor : theme.colors.mainColor};
+  text-decoration: ${({ active}) => active ? "underline" : "none"};
+  border-bottom: 2px solid ${({ active, theme }) => active ? theme.colors.primary : 'transparent'};
+  font-weight: ${({ active }) => active ? 'bold' : 'normal'};
+  font-size: 1.2rem;
+  &:hover {
+    color: ${({ theme }) => theme.colors.mainColor};
+  }
+`;
+
 const EventListing = () => {
+  const [activeTab, setActiveTab] = useState<'upcoming' | 'completed'>('upcoming');
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
+  const [completedEvents, setCompletedEvents] = useState<any[]>([]);
+
   const events = [
     {
       id: 1,
       title: "Billish Ellish concert",
-      date: "2024-06-15",
+      date: "2025-06-15",
       time: "20:00",
       image: "/images/billieeilish.jpg",
       artist: "Billish Eilish",
@@ -88,7 +127,7 @@ const EventListing = () => {
     {
       id: 2,
       title: "Taylor swift Era",
-      date: "2024-06-20",
+      date: "2025-06-20",
       time: "21:00",
       image: "/images/taylorswift.jpg",
       artist: "Taylor Swift",
@@ -97,7 +136,7 @@ const EventListing = () => {
     {
       id: 3,
       title: "Dean Lewis 's Band ",
-      date: "2024-06-25",
+      date: "2025-06-25",
       time: "19:30",
       image: "/images/Dean-lewis.jpg",
       artist: "Symphony Orchestra",
@@ -106,7 +145,7 @@ const EventListing = () => {
     {
       id: 4,
       title: "Pop Extravaganza - Rihanna",
-      date: "2024-07-01",
+      date: "2025-07-01",
       time: "20:30",
       image: "/images/Rihanna.jpg",
       artist: "Rihanna",
@@ -115,7 +154,7 @@ const EventListing = () => {
     {
       id: 5,
       title: "Electronic Dance Night with Black Pink",
-      date: "2024-07-05",
+      date: "2025-07-05",
       time: "22:00",
       image: "./images/black-pink.jpg",
       artist: "Black  Pink",
@@ -124,7 +163,7 @@ const EventListing = () => {
     {
       id: 6,
       title: "Folk Music Festival with Annie",
-      date: "2024-07-10",
+      date: "2025-07-10",
       time: "18:00",
       image: "/images/annie.jpg",
       artist: "Marshallow - annie",
@@ -133,7 +172,7 @@ const EventListing = () => {
     {
       id: 7,
       title: "Hip Hop Showcase",
-      date: "2024-07-15",
+      date: "2025-07-15",
       time: "21:30",
       image: "/images/images-drangons.jpg",
       artist: "images Drangons",
@@ -142,7 +181,7 @@ const EventListing = () => {
     {
       id: 8,
       title: "Blues & Soul Night",
-      date: "2024-07-20",
+      date: "2025-07-20",
       time: "20:00",
       image: "/images/sabrina-carpenter.jpg",
       artist: "Sabrina carpenter",
@@ -151,43 +190,145 @@ const EventListing = () => {
     {
       id: 9,
       title: "World Music Fusion",
-      date: "2024-07-25",
+      date: "2025-07-25",
       time: "19:00",
       image: "/images/harry-styles.jpg",
       artist: "Harry styles",
       price: "Free",
+    },
+    // Add some completed events with streamed URLs
+    {
+      id: 10,
+      title: "Rock Concert 2023",
+      date: "2023-12-15",
+      time: "20:00",
+      image: "/images/rock-concert.jpg",
+      artist: "Rock Band",
+      price: "completed",
+      streamedUrl: "https://www.youtube.com/watch?v=example1",
+    },
+    {
+      id: 11,
+      title: "Jazz Festival 2023",
+      date: "2023-11-20",
+      time: "19:30",
+      image: "/images/jazz-festival.jpg",
+      artist: "Jazz Ensemble",
+      price: "completed",
+      streamedUrl: "https://www.youtube.com/watch?v=example2",
+    },
+    {
+      id: 12,
+      title: "Classical Symphony",
+      date: "2023-10-10",
+      time: "18:00",
+      image: "/images/classical.jpg",
+      artist: "Symphony Orchestra",
+      price: "completed",
+      streamedUrl: "https://www.youtube.com/watch?v=example3",
     }
-    // Add more events as needed
   ];
+
+  useEffect(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Process events to add streamedUrl to all expired events
+    const processedEvents = events.map(event => {
+      const eventDate = new Date(event.date);
+      if (eventDate < today && !event.streamedUrl) {
+        // Add a default streamedUrl for expired events that don't have one
+        return {
+          ...event,
+          streamedUrl: `https://www.youtube.com/watch?v=default-${event.id}`,
+          price: "completed"
+        };
+      }
+      return event;
+    });
+    
+    const upcoming = processedEvents.filter(event => {
+      const eventDate = new Date(event.date);
+      return eventDate >= today;
+    });
+    
+    const completed = processedEvents.filter(event => {
+      const eventDate = new Date(event.date);
+      return eventDate < today;
+    });
+    
+    setUpcomingEvents(upcoming);
+    setCompletedEvents(completed);
+  }, []);
+
+  const renderEvents = (events: any[]) => {
+    return events.map((event) => {
+      const isCompleted = new Date(event.date) < new Date();
+      
+      return (
+        <EventCard key={event.id}>
+          <EventImage src={event.image} alt={event.title} />
+          <EventInfo>
+            <EventTitle>{event.title}</EventTitle>
+            <EventDetail>
+              <IconWrapper icon={FaCalendar as React.ElementType} />
+              {new Date(event.date).toLocaleDateString()}
+            </EventDetail>
+            <EventDetail>
+              <IconWrapper icon={FaClock as React.ElementType} />
+              {event.time}
+            </EventDetail>
+            <EventDetail>
+              <IconWrapper icon={FaTicket as React.ElementType} />
+              {isCompleted ? "Completed" : event.price}
+            </EventDetail>
+            <div style={{ display: 'flex' }}>
+              {isCompleted ? (
+                <WatchButton href={event.streamedUrl} target="_blank" rel="noopener noreferrer">
+                  <IconWrapper icon={FaVideo as React.ElementType} /> Watch
+                </WatchButton>
+              ) : (
+                <ViewButton to={`/event/${event.id}`}>View Event</ViewButton>
+              )}
+            </div>
+          </EventInfo>
+        </EventCard>
+      );
+    });
+  };
 
   return (
     <EventListingContainer>
-      <EventMainTitle>
+      <TabContainer>
+        <Tab 
+          active={activeTab === 'upcoming'} 
+          onClick={() => setActiveTab('upcoming')}
+        >
           Upcoming Events
-      </EventMainTitle>
-      <EventGrid>
-        {events.map((event) => (
-          <EventCard key={event.id}>
-            <EventImage src={event.image} alt={event.title} />
-            <EventInfo>
-              <EventTitle>{event.title}</EventTitle>
-              <EventDetail>
-                <IconWrapper icon={FaCalendar as React.ElementType} />
-                {new Date(event.date).toLocaleDateString()}
-              </EventDetail>
-              <EventDetail>
-                <IconWrapper icon={FaClock as React.ElementType} />
-                {event.time}
-              </EventDetail>
-              <EventDetail>
-                <IconWrapper icon={FaTicket as React.ElementType} />
-                {event.price}
-              </EventDetail>
-              <ViewButton to={`/event/${event.id}`}>View Event</ViewButton>
-            </EventInfo>
-          </EventCard>
-        ))}
-      </EventGrid>
+        </Tab>
+        <Tab 
+          active={activeTab === 'completed'} 
+          onClick={() => setActiveTab('completed')}
+        >
+          Completed Events
+        </Tab>
+      </TabContainer>
+      
+      {activeTab === 'upcoming' ? (
+        <>
+          <EventMainTitle>Upcoming Events</EventMainTitle>
+          <EventGrid>
+            {renderEvents(upcomingEvents)}
+          </EventGrid>
+        </>
+      ) : (
+        <>
+          <EventMainTitle>Completed Events</EventMainTitle>
+          <EventGrid>
+            {renderEvents(completedEvents)}
+          </EventGrid>
+        </>
+      )}
     </EventListingContainer>
   );
 };

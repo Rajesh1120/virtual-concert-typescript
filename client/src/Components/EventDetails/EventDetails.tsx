@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { FaClock, FaTicket, FaUser, FaMusic, FaCalendar } from 'react-icons/fa6';
+import { FaClock, FaTicket, FaUser, FaMusic, FaCalendar, FaCopy } from 'react-icons/fa6';
 import React from 'react';
-
+import { toast } from 'react-toastify';
 interface Event {
   id: number;
   title: string;
@@ -103,12 +103,69 @@ const StreamIframe = styled.iframe`
   border: none;
 `;
 
+const TokenContainer = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  background: ${({ theme }) => theme.colors.background};
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const TokenText = styled.div`
+  font-family: monospace;
+  color: ${({ theme }) => theme.colors.text};
+  flex: 1;
+  margin-right: 1rem;
+  word-break: break-all;
+`;
+
+const CopyButton = styled.button`
+  padding: 0.5rem 1rem;
+  background: ${({ theme }) => theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+  }
+`;
+
 const IconWrapper = ({ icon: Icon }: { icon: React.ElementType }) => {
   return Icon ? <Icon /> : null;
 };
+
+const JoinButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  background: ${({ theme }) => theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+`;
+
 const EventDetail = () => {
   const { id } = useParams();
   const [hasTicket, setHasTicket] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  // Function to generate random token
+  const generateToken = () => {
+    const token = Math.random().toString(36).substring(2) + 
+                 Date.now().toString(36) + 
+                 Math.random().toString(36).substring(2);
+    return token;
+  };
 
   // Mock event data - in a real app, this would be fetched from an API
   const events: Record<number, Event> = {
@@ -234,8 +291,16 @@ const EventDetail = () => {
   }
 
   const handleTicketPurchase = () => {
-    // In a real app, this would handle payment processing
+    const token = generateToken();
+    setAccessToken(token);
     setHasTicket(true);
+  };
+
+  const handleCopyToken = () => {
+    navigator.clipboard.writeText(accessToken);
+    setCopied(true);
+    toast.success('Token copied to clipboard');
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -277,9 +342,18 @@ const EventDetail = () => {
               Get Free Access
             </TicketButton>
           ) : (
-            <TicketButton disabled>
-              Access Granted
-            </TicketButton>
+            <>
+              <TicketButton disabled>
+                Access Granted
+              </TicketButton>
+              <TokenContainer>
+                <TokenText>{accessToken}</TokenText>
+                <CopyButton onClick={handleCopyToken}>
+                  <IconWrapper icon={FaCopy as React.ElementType} />
+                  
+                </CopyButton>
+              </TokenContainer>
+            </>
           )}
         </EventInfo>
       </EventHeader>
@@ -287,6 +361,9 @@ const EventDetail = () => {
       {hasTicket && (
         <div>
           <h2>Live Stream</h2>
+          <JoinButton onClick={() => window.open('/join-concert', '_blank')}>
+            Join Concert Now
+          </JoinButton>
           <StreamContainer>
             <StreamIframe
               src={event.streamUrl}

@@ -296,6 +296,11 @@ const EventDetail = () => {
     setHasTicket(true);
   };
 
+  const handleCancel = () => {
+    setHasTicket(false);
+    setAccessToken('');
+  };
+
   const handleCopyToken = () => {
     navigator.clipboard.writeText(accessToken);
     setCopied(true);
@@ -345,6 +350,9 @@ const EventDetail = () => {
             <>
               <TicketButton disabled>
                 Access Granted
+              </TicketButton>
+              <TicketButton onClick={handleCancel}>
+                Cancel 
               </TicketButton>
               <TokenContainer>
                 <TokenText>{accessToken}</TokenText>

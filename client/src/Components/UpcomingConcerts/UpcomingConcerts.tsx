@@ -24,16 +24,19 @@ interface activeLinks {
   "Artists": boolean
   
 }
-interface NextButtonProps{
+interface NextButtonProps {
+  disabled?: boolean;
+}
+
+interface PrevButtonProps {
+  edgecase?: boolean;
+  disabled?: boolean;
+}
+
+interface PaginationState {
   i: number;
   j: number;
-  
 }
-interface PrevButtonProps{
-  edgecase?:boolean;
-}
-
-
 
 const Section = styled.section`
   padding: 4rem 2rem;
@@ -105,23 +108,24 @@ const PrevButton= styled.button<PrevButtonProps>`
   padding: 1rem;
   height: 50px;
   left: 0;
-  cursor:pointer;
-  border:none;
-  background-color: ${(({edgecase})=>(edgecase? "rgb(202, 107, 153)": "rgb(240, 95, 165)"))}
-
+  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
+  border: none;
+  background-color: ${({ disabled, edgecase }) => 
+    disabled ? 'rgb(202, 107, 153)' : 
+    edgecase ? 'rgb(202, 107, 153)' : 'rgb(240, 95, 165)'};
   color: white;
-  
-    
+  opacity: ${({ disabled }) => disabled ? '0.6' : '1'};
 `;
-const NextButton = styled.button`
+const NextButton = styled.button<NextButtonProps>`
   position: absolute;
-  right:0;
-  padding:1rem;
+  right: 0;
+  padding: 1rem;
   height: 50px;
-  cursor:pointer;
-  border:none;
-  background-color:rgb(240, 95, 165) ;
+  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
+  border: none;
+  background-color: ${({ disabled }) => disabled ? 'rgb(202, 107, 153)' : 'rgb(240, 95, 165)'};
   color: white;
+  opacity: ${({ disabled }) => disabled ? '0.6' : '1'};
 `;
 
 const ViewAllButton = styled(Link)`
@@ -141,7 +145,7 @@ const ViewAllButton = styled(Link)`
 `;
 
 const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
-  const [nextPrevButtonVal, setNextPrevButtonVal]=useState<NextButtonProps>({
+  const [nextPrevButtonVal, setNextPrevButtonVal]=useState<PaginationState>({
     i: 0,
     j: 3,
     
@@ -155,26 +159,26 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
     
   const handleNextButton=()=>{
       setNextPrevButtonVal(prevbutton=>{
-        if(prevbutton.j + 3 > events.length){
-          return ({i:prevbutton.j, j: prevbutton.j + events.length - prevbutton.j })
-        }else{
-          return ({i:prevbutton.j, j: prevbutton.j + 3  })
+        if (prevbutton.j + 3 > events.length) {
+          return ({ i: prevbutton.j, j: events.length });
+        } else {
+          return ({ i: prevbutton.j, j: prevbutton.j + 3 });
         }
       })
     
     
   }
   const handlePrevButton = () => {
-    if (nextPrevButtonVal.i <=0){
-      setEdgeCase({edgecase:true})
+    if (nextPrevButtonVal.i <= 3) {
+      setNextPrevButtonVal({ i: 0, j: 3 });
+      setEdgeCase({ edgecase: true });
+    } else {
+      setNextPrevButtonVal(prevbutton => ({
+        i: prevbutton.i - 3,
+        j: prevbutton.i
+      }));
+      setEdgeCase({ edgecase: false });
     }
-    else{
-      setNextPrevButtonVal(prevbutton => {
-        return ({i:prevbutton.i-3, j: prevbutton.i})
-      })
-      setEdgeCase({edgecase:false})
-    }
-    
   }
   const events: Event[] = [
     {
@@ -239,8 +243,13 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
         {events.length > 0 &&  nextPrevButtonVal.j <= events.length && nextPrevButtonVal.i >= 0 &&
         
           <Grid>
-              {nextPrevButtonVal.i <= 0 ? <PrevButton edgecase onClick={handlePrevButton} disabled>Prev</PrevButton>:
-              <PrevButton onClick={handlePrevButton} edgecase>Prev</PrevButton>}
+              <PrevButton 
+                edgecase={nextPrevButtonVal.i <= 0} 
+                onClick={handlePrevButton} 
+                disabled={nextPrevButtonVal.i <= 0}
+              >
+                Prev
+              </PrevButton>
             {events.slice(nextPrevButtonVal.i, nextPrevButtonVal.j).map(event => (
               <EventCard key={event.id} to={`/event/${event.id}`}>
                 <EventImage src={event.image} alt={event.title} />
@@ -257,8 +266,12 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
                 </EventInfo>
               </EventCard>
             ))}
-            {nextPrevButtonVal.j >= events.length ? <NextButton onClick={handleNextButton} disabled>Next</NextButton> : 
-            <NextButton onClick={handleNextButton} >Next</NextButton>}
+            <NextButton 
+              onClick={handleNextButton} 
+              disabled={nextPrevButtonVal.j >= events.length}
+            >
+              Next
+            </NextButton>
           </Grid>
        }
         <ViewAllButton onClick={handleClick} to="/events">See All Events</ViewAllButton>

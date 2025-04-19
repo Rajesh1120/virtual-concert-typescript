@@ -57,8 +57,13 @@ const Register = () =>{
     const handleSubmit= async (e:FormEvent)=>{
         e.preventDefault();
         // console.log(userData)
-        if (userData.password !== userData.conformpassword){
+        if (userData.email === "" || userData.password === "" || userData.conformpassword === ""){
+            toast.error("Please fill all the fields")
+        }
+        else if (userData.password !== userData.conformpassword){
+        
             console.log("your password is don't match ")
+            toast.error("your password is don't match ")
         }
         else{
             try{
@@ -95,11 +100,11 @@ const Register = () =>{
         <LoginForm>
             <Header2>Register</Header2>
             <label>Email: </label>
-            <Input type="text" value={userData.email} onChange={handleChange} name="email" placeholder=" Enter Email " required></Input>
+            <Input type="text" value={userData.email}  onChange={handleChange} name="email" placeholder=" Enter Email " required></Input>
             <label>Password: </label>
-            <Input type="password" value={userData.password} onChange={handleChange} name="password" placeholder=" Enter password " required></Input>
+            <Input type="password" value={userData.password}  onChange={handleChange} name="password" placeholder=" Enter password " required></Input>
             <label>Conform Password: </label>
-            <Input type="password" value={userData.conformpassword}  onChange={handleChange} name="conformpassword" placeholder=" Enter password " required></Input>
+            <Input type="password" value={userData.conformpassword} onChange={handleChange} name="conformpassword" placeholder=" Enter password " required></Input>
             <SubmitButton type="submit" onClick={handleSubmit}to={"/"}>Register</SubmitButton>
             <label>Already have an account?{' '}
                 <Anchor to={'/'} style={{ color: '#e31c79' }}>

@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
       Logout: link === "Logout",
       Artists: link === "Artists",
     });
-    console.log("inside")
+    // console.log("inside")
     if (link === "Logout"){
       setActiveLink({
         Home: true,

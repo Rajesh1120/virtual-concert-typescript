@@ -81,13 +81,13 @@ const Features = () => {
             Get access to behind-the-scenes content and virtual meet-and-greets
           </FeatureDescription>
         </Feature>
-        <Feature>
+        {/* <Feature>
           <IconWrapper icon={FaTicket as React.ElementType } />
           <FeatureTitle>Easy Ticketing</FeatureTitle>
           <FeatureDescription>
             Easy, secure ticket purchasing for concerts
           </FeatureDescription>
-        </Feature>
+        </Feature> */}
       </FeaturesGrid>
     </FeaturesSection>
   );

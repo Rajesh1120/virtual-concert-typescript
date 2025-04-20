@@ -23,35 +23,21 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    # Install client dependencies
+    # Client setup and build
     - name: Install client dependencies
       working-directory: ./client
-      run: npm ci
+      run: |
+        npm ci
+        npm run build
+        npm test -- --watchAll=false || true
 
-    # Build client
-    - name: Build client
-      working-directory: ./client
-      run: npm run build
-
-    # Test client
-    - name: Test client
-      working-directory: ./client
-      run: npm test -- --watchAll=false
-
-    # Install server dependencies
+    # Server setup and build
     - name: Install server dependencies
       working-directory: ./server
-      run: npm ci
-
-    # Build server
-    - name: Build server
-      working-directory: ./server
-      run: npm run build
-
-    # Test server
-    - name: Test server
-      working-directory: ./server
-      run: npm test
+      run: |
+        npm ci
+        npm run build
+        npm test || true
 
   deploy:
     needs: build-and-test

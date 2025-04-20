@@ -1,0 +1,69 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    # Install client dependencies
+    - name: Install client dependencies
+      working-directory: ./client
+      run: npm ci
+
+    # Build client
+    - name: Build client
+      working-directory: ./client
+      run: npm run build
+
+    # Test client
+    - name: Test client
+      working-directory: ./client
+      run: npm test -- --watchAll=false
+
+    # Install server dependencies
+    - name: Install server dependencies
+      working-directory: ./server
+      run: npm ci
+
+    # Build server
+    - name: Build server
+      working-directory: ./server
+      run: npm run build
+
+    # Test server
+    - name: Test server
+      working-directory: ./server
+      run: npm test
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to production
+      run: echo "Add your deployment steps here"
+      # Add your deployment configuration here
+      # Examples:
+      # - Deploy to Heroku
+      # - Deploy to AWS
+      # - Deploy to Google Cloud
+      # - Deploy to Azure 

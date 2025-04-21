@@ -38,7 +38,7 @@ interface activeLinks {
   
 }
 
-const NavLink = styled(Link)<{ $isActive: boolean }>`
+const NavLink = styled(Link)`
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -46,12 +46,10 @@ const NavLink = styled(Link)<{ $isActive: boolean }>`
     color: #e31c79;
   }
 
-  ${(props) =>
-    props.$isActive &&
-    `
+  &.active {
     text-decoration: underline;
     color: #e31c79;
-  `}
+  }
 `;
 
 const CTAButton = styled(Link)`
@@ -109,14 +107,14 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
       <Nav>
       <NavLink
           to="/home"
-          $isActive={activeLink.Home}
+          className={activeLink.Home ? 'active' : ''}
           onClick={() => handleLinkClick("Home")}
         >
           Home
         </NavLink>
         <NavLink
           to="/events"
-          $isActive={activeLink.Events}
+          className={activeLink.Events ? 'active' : ''}
           onClick={() => handleLinkClick("Events")}
         >
           Events
@@ -124,21 +122,21 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
 
         <NavLink
           to="/artists"
-          $isActive={activeLink.Artists}
+          className={activeLink.Artists ? 'active' : ''}
           onClick={() => handleLinkClick("Artists")}
         >
           Artists
         </NavLink>
         <NavLink
           to="/about"
-          $isActive={activeLink.About}
+          className={activeLink.About ? 'active' : ''}
           onClick={() => handleLinkClick("About")}
         >
           About
         </NavLink>
         <NavLink
           to="/"
-          $isActive={activeLink.Logout}
+          className={activeLink.Logout ? 'active' : ''}
           onClick={()=>{handleLinkClick("Logout")}}
         >
           Logout

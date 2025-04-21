@@ -7,7 +7,7 @@ export const register = async (req : Request, res: Response): Promise<void>=>{
     try{
         const {email, password} = req.body
     // find the user is exists or not
-        console.log(email, password)
+        // console.log(email, password)
         let user= await User.findOne({email});
         if (user){
             res.status(400).json({ message: "User already exists"})
@@ -26,7 +26,7 @@ export const register = async (req : Request, res: Response): Promise<void>=>{
         return ;
     }
     catch(error: any){
-        console.log(error)
+        // console.log(error)
         res.status(500).json(" Internal server error")
         return ;
     }

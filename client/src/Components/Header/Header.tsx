@@ -38,7 +38,7 @@ interface activeLinks {
   
 }
 
-const NavLink = styled(Link)<{ isActive: boolean }>`
+const NavLink = styled(Link)<{ $isActive: boolean }>`
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -47,7 +47,7 @@ const NavLink = styled(Link)<{ isActive: boolean }>`
   }
 
   ${(props) =>
-    props.isActive &&
+    props.$isActive &&
     `
     text-decoration: underline;
     color: #e31c79;
@@ -109,14 +109,14 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
       <Nav>
       <NavLink
           to="/home"
-          isActive={activeLink.Home}
+          $isActive={activeLink.Home}
           onClick={() => handleLinkClick("Home")}
         >
           Home
         </NavLink>
         <NavLink
           to="/events"
-          isActive={activeLink.Events}
+          $isActive={activeLink.Events}
           onClick={() => handleLinkClick("Events")}
         >
           Events
@@ -124,21 +124,21 @@ const Header: React.FC<HeaderProps> = ({ activeLink, setActiveLink, Loggedout })
 
         <NavLink
           to="/artists"
-          isActive={activeLink.Artists}
+          $isActive={activeLink.Artists}
           onClick={() => handleLinkClick("Artists")}
         >
           Artists
         </NavLink>
         <NavLink
           to="/about"
-          isActive={activeLink.About}
+          $isActive={activeLink.About}
           onClick={() => handleLinkClick("About")}
         >
           About
         </NavLink>
         <NavLink
           to="/"
-          isActive={activeLink.Logout}
+          $isActive={activeLink.Logout}
           onClick={()=>{handleLinkClick("Logout")}}
         >
           Logout

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCalendar, FaClock, FaTicket, FaVideo } from 'react-icons/fa6';
 
@@ -114,7 +114,7 @@ const EventListing = () => {
   const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
   const [completedEvents, setCompletedEvents] = useState<any[]>([]);
 
-  const events = [
+  const events = useMemo(() => [
     {
       id: 1,
       title: "Billish Ellish concert",
@@ -227,7 +227,7 @@ const EventListing = () => {
       price: "completed",
       streamedUrl: "https://www.youtube.com/watch?v=example3",
     }
-  ];
+  ], []); // Empty dependency array since this data is static
 
   useEffect(() => {
     const today = new Date();

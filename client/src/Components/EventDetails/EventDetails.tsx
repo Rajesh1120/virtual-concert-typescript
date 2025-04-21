@@ -358,7 +358,7 @@ const EventDetail = () => {
                 <TokenText>{accessToken}</TokenText>
                 <CopyButton onClick={handleCopyToken}>
                   <IconWrapper icon={FaCopy as React.ElementType} />
-                  
+                  {copied && <span style={{ marginLeft: '5px', fontSize: '0.8rem' }}>Copied!</span>}
                 </CopyButton>
               </TokenContainer>
             </>

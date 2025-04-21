@@ -304,7 +304,7 @@ const EventDetail = () => {
   const handleCopyToken = () => {
     navigator.clipboard.writeText(accessToken);
     setCopied(true);
-    toast.success('Token copied to clipboard');
+    toast.success('Token copied to clipboard!');
     setTimeout(() => setCopied(false), 2000);
   };
 

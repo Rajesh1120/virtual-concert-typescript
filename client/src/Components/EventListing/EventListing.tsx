@@ -259,7 +259,7 @@ const EventListing = () => {
     
     setUpcomingEvents(upcoming);
     setCompletedEvents(completed);
-  }, []);
+  }, [events]);
 
   const renderEvents = (events: any[]) => {
     return events.map((event) => {

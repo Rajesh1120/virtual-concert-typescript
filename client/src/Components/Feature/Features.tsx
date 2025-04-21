@@ -1,4 +1,4 @@
-import { FaVideo, FaComments, FaStar, FaTicket } from 'react-icons/fa6';
+import { FaVideo, FaComments, FaStar } from 'react-icons/fa6';
 import React from 'react';
 import styled from 'styled-components'
 

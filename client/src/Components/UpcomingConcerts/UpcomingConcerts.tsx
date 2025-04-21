@@ -148,10 +148,7 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
   const [nextPrevButtonVal, setNextPrevButtonVal]=useState<PaginationState>({
     i: 0,
     j: 3,
-    
   })
-  const [edgecase, setEdgeCase]=useState<PrevButtonProps>({edgecase:false});
-
 
   const handleClick=()=>{
    setActiveLink({ Home: false,Events: true, About: false, Logout: false, Artists: false})
@@ -165,19 +162,16 @@ const UpcomingConcerts : React.FC<SetActiveProps> =({setActiveLink}) => {
           return ({ i: prevbutton.j, j: prevbutton.j + 3 });
         }
       })
-    
-    
   }
+  
   const handlePrevButton = () => {
     if (nextPrevButtonVal.i <= 3) {
       setNextPrevButtonVal({ i: 0, j: 3 });
-      setEdgeCase({ edgecase: true });
     } else {
       setNextPrevButtonVal(prevbutton => ({
         i: prevbutton.i - 3,
         j: prevbutton.i
       }));
-      setEdgeCase({ edgecase: false });
     }
   }
   const events: Event[] = [

@@ -4,13 +4,6 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify'
 
-interface NavLinkProps {
-  to: string;
-  children: React.ReactNode;
-  isActive: boolean;
-  setActiveLink: (link: string) => void;
-}
-
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0;

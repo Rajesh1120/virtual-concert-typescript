@@ -34,6 +34,12 @@ const Input= styled.input`
     type:
 
 `;
+const HelperText = styled.p`
+    color: #e31c79;
+    font-size: 0.8rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
+`;
 const Header2= styled.h1`
     text-align : center;
     color: #e31c79;
@@ -73,6 +79,13 @@ const Register = () =>{
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(userData.email)) {
             toast.error("Please enter a valid email address");
+            return;
+        }
+        
+        // Password validation
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(userData.password)) {
+            toast.error("Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character");
             return;
         }
         
@@ -133,6 +146,7 @@ const Register = () =>{
                 <Input type="text" value={userData.email} onChange={handleChange} name="email" placeholder=" Enter Email " required></Input>
                 <label>Password: </label>
                 <Input type="password" value={userData.password} onChange={handleChange} name="password" placeholder=" Enter password " required></Input>
+                <HelperText>Password must be at least 8 characters with 1 uppercase, 1 lowercase, 1 number, and 1 special character</HelperText>
                 <label>Conform Password: </label>
                 <Input type="password" value={userData.conformpassword} onChange={handleChange} name="conformpassword" placeholder=" Enter password " required></Input>
                 <SubmitButton type="submit">Register</SubmitButton>

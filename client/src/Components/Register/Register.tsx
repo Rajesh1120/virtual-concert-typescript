@@ -66,8 +66,13 @@ const Register = () =>{
         password:"",
         conformpassword:"",
     })
+    
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [passwordError, setPasswordError] = useState("");
+    
     const handleSubmit= async (e:FormEvent)=>{
         e.preventDefault();
+        setFormSubmitted(true);
         
         // Basic validation
         if (userData.email === "" || userData.password === "" || userData.conformpassword === ""){
@@ -85,8 +90,10 @@ const Register = () =>{
         // Password validation
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(userData.password)) {
-            toast.error("Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character");
+            setPasswordError("Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character");
             return;
+        } else {
+            setPasswordError("");
         }
         
         // Password match validation
@@ -125,6 +132,8 @@ const Register = () =>{
                 password: "",
                 conformpassword: "",
             });
+            setFormSubmitted(false);
+            setPasswordError("");
             
             toast.success("Registration successful! Please login.");
         } catch (error) {
@@ -146,7 +155,7 @@ const Register = () =>{
                 <Input type="text" value={userData.email} onChange={handleChange} name="email" placeholder=" Enter Email " required></Input>
                 <label>Password: </label>
                 <Input type="password" value={userData.password} onChange={handleChange} name="password" placeholder=" Enter password " required></Input>
-                <HelperText>Password must be at least 8 characters with 1 uppercase, 1 lowercase, 1 number, and 1 special character</HelperText>
+                {formSubmitted && passwordError && <HelperText>{passwordError}</HelperText>}
                 <label>Conform Password: </label>
                 <Input type="password" value={userData.conformpassword} onChange={handleChange} name="conformpassword" placeholder=" Enter password " required></Input>
                 <SubmitButton type="submit">Register</SubmitButton>

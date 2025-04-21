@@ -120,7 +120,7 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
                 }
 
             }catch(error){
-                console.error("Something went wrong", error);
+                // console.error("Something went wrong", error);
                 toast.error("Server error. Please try again later.");
             }
              // after the validating the form then only u have to store the userdata in database

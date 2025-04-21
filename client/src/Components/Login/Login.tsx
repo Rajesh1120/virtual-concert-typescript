@@ -64,6 +64,20 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
         // console.log(Loggedin)
          const handleSubmit= async (e:FormEvent)=>{
              e.preventDefault();
+             
+             // Basic validation
+             if (!userData.email || !userData.password) {
+                 toast.error("Please enter both email and password");
+                 return;
+             }
+             
+             // Email format validation
+             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+             if (!emailRegex.test(userData.email)) {
+                 toast.error("Please enter a valid email address");
+                 return;
+             }
+             
              // console.log(userData)
             try{
                 const response= await fetch("http://localhost:5001/api/login",{
@@ -76,8 +90,19 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
                         password:userData.password
                     })
                 })
-                const data=await response.json()
                 
+                // Check if response is not ok (status code >= 400)
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    if (response.status === 400) {
+                        toast.error(errorData.message || "Invalid email or password. Please try again.");
+                    } else {
+                        toast.error(errorData.message || `Server error (${response.status}). Please try again later.`);
+                    }
+                    return;
+                }
+                
+                const data = await response.json();
                 
                 // console.log(data)
                 if (data.message === "Login successful"){
@@ -89,12 +114,14 @@ const Login:React.FC<LoggedinProps> = ({Loggedin, LoggingFunc}) =>{
                     
                     // Navigate to the page the user was trying to access, or home if none
                     navigate(from, { replace: true });
+                } else {
+                    // Show error message from the server
+                    toast.error(data.message || "Login failed. Please check your credentials.");
                 }
-                // 
-                // <Navigate to ="/home" />
 
             }catch(error){
                 console.error("Something went wrong", error);
+                toast.error("Server error. Please try again later.");
             }
              // after the validating the form then only u have to store the userdata in database
          }
